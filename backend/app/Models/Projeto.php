@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Projeto extends Model
 {
-   use HasFactory,  HasUuids;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'nome',
@@ -17,4 +17,12 @@ class Projeto extends Model
         'data_inicio',
         'data_fim',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'data_inicio' => 'date',
+            'data_fim' => 'date',
+        ];
+    }
 }
