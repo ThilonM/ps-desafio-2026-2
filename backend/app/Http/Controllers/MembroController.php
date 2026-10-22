@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateMembroRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
-use Throwable;
 
 class MembroController extends Controller
 {
