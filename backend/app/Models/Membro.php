@@ -13,6 +13,7 @@ class Membro extends Model
     protected $fillable = [
         'nome',
         'email',
+        'senha',
         'cor_favorita',
         'data_aniversario',
         'image',
@@ -21,5 +22,12 @@ class Membro extends Model
     protected $hidden = [
         'senha',
     ];
-}
 
+    protected function casts(): array
+    {
+        return [
+            'senha' => 'hashed',
+            'data_aniversario' => 'date',
+        ];
+    }
+}
