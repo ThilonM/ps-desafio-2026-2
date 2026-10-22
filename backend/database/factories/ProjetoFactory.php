@@ -16,9 +16,9 @@ class ProjetoFactory extends Factory
      */
     public function definition(): array
     {
-        $dataInicio = fake()->dateTimeBetween('2025-01-01', '2027-12-30');
+        $dataInicio = fake()->dateTimeBetween('2025-01-01', '2027-12-29');
         $dataFim = fake()->dateTimeBetween(
-            $dataInicio->modify('+1 day'),
+            (clone $dataInicio)->modify('+1 day'),
             '2027-12-31'
         );
 
