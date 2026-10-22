@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('membros', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nome');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('senha');
-            $table->string('cor_favorita');
-            $table->date('data_aniversario');
+            $table->string('cor_favorita')->nullable();
+            $table->date('data_aniversario')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });
