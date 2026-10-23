@@ -13,7 +13,7 @@ export function FormField({
   return (
     <div
       className={cn(
-        'grid grid-cols-4 items-center has-[img]:items-start [&>label]:has-[img]:mt-2.5 [&>input]:col-span-3 [&>img]:col-start-2 [&>img]:col-end-5 [&>p]:col-start-2 [&>p]:col-end-5 [&>p]:text-left [&>p]:-mt-3 [&>button[role="combobox"]]:col-start-2 [&>button[role="combobox"]]:col-end-5 gap-4 text-right',
+        'grid grid-cols-4 items-center has-[img]:items-start [&>label]:has-[img]:mt-2.5 [&>input]:col-span-3 [&>select]:col-span-3 [&>img]:col-start-2 [&>img]:col-end-5 [&>p]:col-start-2 [&>p]:col-end-5 [&>p]:text-left [&>p]:-mt-3 [&>button[role="combobox"]]:col-start-2 [&>button[role="combobox"]]:col-end-5 gap-4 text-right',
         { hidden },
         className,
       )}
