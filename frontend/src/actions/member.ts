@@ -14,7 +14,8 @@ export async function createMember(form: FormData) {
 }
 
 export async function updateMember(form: FormData) {
-  const res = await api('PUT', `/membros/${form.get('id')}`, {
+  // POST + _method=PUT: PHP/Laravel não popula multipart em PUT real
+  const res = await api('POST', `/membros/${form.get('id')}`, {
     data: form,
   })
 
