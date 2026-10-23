@@ -30,8 +30,9 @@ class AlocacaoMembroService
     }
 
     /**
-     * Garante que o membro pode ser alocado no projeto (máx. 2 ativos).
+     * Garante que o membro pode ser alocado no projeto (máx. 2 ativos no mesmo intervalo).
      * Se já estiver no projeto, não conta de novo.
+     * Projetos fora do intervalo atual (ainda não iniciados ou já encerrados) não entram no limite.
      *
      * @throws ValidationException
      */
@@ -49,7 +50,7 @@ class AlocacaoMembroService
 
         if ($ativos >= self::LIMITE_PROJETOS_ATIVOS) {
             throw ValidationException::withMessages([
-                'membro_id' => 'Este membro já está alocado em 2 projetos ativos. Remova-o de outro projeto antes de alocar.',
+                'membro_id' => 'Este membro já está alocado em 2 projetos ativos no mesmo intervalo. Remova-o de outro projeto antes de alocar.',
             ]);
         }
     }
