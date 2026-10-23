@@ -1,8 +1,14 @@
+'use client'
+
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 import { ComponentProps } from 'react'
 import { VariantProps, cva } from 'class-variance-authority'
+import {
+  clearPortugueseCustomValidity,
+  setPortugueseCustomValidity,
+} from '@/lib/validation-messages-pt'
 
 export const inputVariants = cva('', {
   variants: {
@@ -28,6 +34,9 @@ export function Input({
   error,
   hidden,
   size,
+  onInvalid,
+  onInput,
+  onChange,
   ...props
 }: InputProps) {
   return (
@@ -42,6 +51,18 @@ export function Input({
           { hidden },
           className,
         )}
+        onInvalid={(event) => {
+          setPortugueseCustomValidity(event.currentTarget)
+          onInvalid?.(event)
+        }}
+        onInput={(event) => {
+          clearPortugueseCustomValidity(event.currentTarget)
+          onInput?.(event)
+        }}
+        onChange={(event) => {
+          clearPortugueseCustomValidity(event.currentTarget)
+          onChange?.(event)
+        }}
         {...props}
       />
       {error && <p className="text-destructive text-xs mt-2">{error}</p>}

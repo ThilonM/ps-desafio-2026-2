@@ -1,13 +1,9 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import { toast as showToast } from '@/components/use-toast'
 import type { ResponseErrorType } from '@/services/api'
 
-type ToastFn = (props: {
-  title?: ReactNode
-  description?: ReactNode
-  variant?: 'default' | 'destructive'
-}) => void
+type ToastFn = typeof showToast
 
 /** Exibe mensagem 422 do Laravel (message + errors por campo). */
 export function toastApiError(

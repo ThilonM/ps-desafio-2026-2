@@ -52,7 +52,7 @@ export function DialogCreateTarefa({
           <DialogDescription>
             Vincule a tarefa a um projeto e atribua obrigatoriamente a um
             membro. Se o membro ainda não estiver no projeto, a alocação
-            respeita a trava de no máximo 2 projetos ativos.
+            respeita a trava de no máximo 2 projetos ativos no mesmo intervalo.
           </DialogDescription>
         </DialogHeader>
         <form action={submit}>

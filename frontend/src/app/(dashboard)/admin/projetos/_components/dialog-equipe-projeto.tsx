@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { Label } from '@/components/label'
+import { NativeSelect } from '@/components/native-select'
 import {
   attachMembroProjeto,
   detachMembroProjeto,
@@ -92,8 +93,8 @@ export function DialogEquipeProjeto({
         <DialogHeader>
           <DialogTitle>Equipe — {projeto.nome}</DialogTitle>
           <DialogDescription>
-            Um membro pode estar em no máximo 2 projetos ativos ao mesmo tempo.
-            Se a trava disparar, o aviso aparece neste toast.
+            Um membro pode estar em no máximo 2 projetos ativos no mesmo
+            intervalo de realização. Se a trava disparar, o aviso aparece neste toast.
           </DialogDescription>
         </DialogHeader>
 
@@ -128,13 +129,15 @@ export function DialogEquipeProjeto({
 
           <form action={submitAttach} className="space-y-3">
             <div className="space-y-2">
-              <Label htmlFor={`membro-${projeto.id}`}>Alocar membro</Label>
-              <select
+              <Label htmlFor={`membro-${projeto.id}`} required>
+                Alocar membro
+              </Label>
+              <NativeSelect
                 id={`membro-${projeto.id}`}
                 name="membro_id"
                 required
                 defaultValue=""
-                className="w-full rounded border border-input bg-transparent px-3 py-2 text-sm shadow"
+                className="w-full"
               >
                 <option value="" disabled>
                   Selecione um membro
@@ -144,7 +147,7 @@ export function DialogEquipeProjeto({
                     {membro.nome}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
               <Input type="hidden" name="projeto_id" value={projeto.id} />
             </div>
             <SubmitButton label="Alocar" />

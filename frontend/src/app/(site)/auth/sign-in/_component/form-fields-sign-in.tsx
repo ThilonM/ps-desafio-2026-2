@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { Label } from '@/components/label'
@@ -14,7 +16,7 @@ export function FormFieldsSignIn({ error }: FormFieldsSignIn) {
     <>
       <div>
         <Label htmlFor="email" className="mt-2" required>
-          Email
+          E-mail
         </Label>
         <Input
           type="email"

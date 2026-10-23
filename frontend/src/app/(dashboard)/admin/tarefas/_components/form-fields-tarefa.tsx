@@ -5,6 +5,7 @@ import { FormFieldsGroup, FormField } from '@/components/dashboard/form'
 import { DialogFooter } from '@/components/dialog'
 import { Input } from '@/components/input'
 import { Label } from '@/components/label'
+import { NativeSelect } from '@/components/native-select'
 import { cn } from '@/lib/utils'
 import { membroType } from '@/types/member'
 import { projetoType } from '@/types/projeto'
@@ -39,7 +40,9 @@ export default function FormFieldsTarefa({
           <Input defaultValue={tarefa.id} type="text" name="id" hidden />
         )}
         <FormField>
-          <Label htmlFor="titulo">Título</Label>
+          <Label htmlFor="titulo" required>
+            Título
+          </Label>
           <Input
             name="titulo"
             id="titulo"
@@ -62,14 +65,15 @@ export default function FormFieldsTarefa({
           />
         </FormField>
         <FormField>
-          <Label htmlFor="projeto_id">Projeto</Label>
-          <select
+          <Label htmlFor="projeto_id" required>
+            Projeto
+          </Label>
+          <NativeSelect
             name="projeto_id"
             id="projeto_id"
             defaultValue={tarefa?.projeto_id ?? ''}
             disabled={pending || readOnly}
             required
-            className="col-span-3 rounded border border-input bg-transparent px-3 py-2 text-base shadow"
           >
             <option value="" disabled>
               Selecione um projeto
@@ -79,17 +83,18 @@ export default function FormFieldsTarefa({
                 {projeto.nome}
               </option>
             ))}
-          </select>
+          </NativeSelect>
         </FormField>
         <FormField>
-          <Label htmlFor="membro_id">Membro</Label>
-          <select
+          <Label htmlFor="membro_id" required>
+            Membro
+          </Label>
+          <NativeSelect
             name="membro_id"
             id="membro_id"
             defaultValue={tarefa?.membro_id ?? ''}
             disabled={pending || readOnly}
             required
-            className="col-span-3 rounded border border-input bg-transparent px-3 py-2 text-base shadow"
           >
             <option value="" disabled>
               Selecione um membro
@@ -99,23 +104,22 @@ export default function FormFieldsTarefa({
                 {membro.nome}
               </option>
             ))}
-          </select>
+          </NativeSelect>
         </FormField>
         <FormField>
-          <Label htmlFor="status">Status</Label>
-          <select
+          <Label htmlFor="status">Situação</Label>
+          <NativeSelect
             name="status"
             id="status"
             defaultValue={tarefa?.status ?? 'pendente'}
             disabled={pending || readOnly}
-            className="col-span-3 rounded border border-input bg-transparent px-3 py-2 text-base shadow"
           >
             {statuses.map((status) => (
               <option key={status} value={status}>
                 {TAREFA_STATUS_LABELS[status]}
               </option>
             ))}
-          </select>
+          </NativeSelect>
         </FormField>
       </FormFieldsGroup>
       <DialogFooter className={cn({ hidden: readOnly })}>
