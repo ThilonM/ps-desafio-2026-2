@@ -11,7 +11,8 @@ import {
 import FormFieldsProjeto from './form-fields-project'
 import { createProjeto } from '@/actions/projeto'
 import { filterFormData } from '@/services/filter-form-data'
-import { useEffect, useState } from 'react'
+import { toastApiError } from '@/services/toast-api-error'
+import { useState } from 'react'
 import { useToast } from '@/components/use-toast'
 
 interface DialogCreateProjetoProps {
@@ -27,7 +28,7 @@ export function DialogCreateProjeto({ children }: DialogCreateProjetoProps) {
     const { error } = await JSON.parse(await createProjeto(newForm))
 
     if (error) {
-      toast({ title: 'Não foi possível criar o projeto!' })
+      toastApiError(toast, error, 'Não foi possível criar o projeto!')
     } else {
       toast({ title: 'Projeto criado com sucesso!' })
       setOpen(false)

@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   DialogHeader,
@@ -7,40 +7,39 @@ import {
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from "@/components/dialog";
-import FormFieldsMember from "./form-fields-member";
-import { updateMember } from "@/actions/member";
-import { filterFormData } from "@/services/filter-form-data";
-import { useState } from "react";
-import { useToast } from "@/components/use-toast";
-import { membroType } from "@/types/member";
-import SkeletonFormFieldsMember from "./skeleton-members";
+} from '@/components/dialog'
+import FormFieldsMember from './form-fields-member'
+import { updateMember } from '@/actions/member'
+import { filterFormData } from '@/services/filter-form-data'
+import { toastApiError } from '@/services/toast-api-error'
+import { useState } from 'react'
+import { useToast } from '@/components/use-toast'
+import { membroType } from '@/types/member'
+import SkeletonFormFieldsMember from './skeleton-members'
 
 interface DialogUpdateMemberProps {
-  member: membroType;
-  children: React.ReactNode;
+  member: membroType
+  children: React.ReactNode
 }
 
-export function DialogUpdateMember({ member, children }: DialogUpdateMemberProps) {
-  const [open, setOpen] = useState<boolean>();
-  const { toast } = useToast();
+export function DialogUpdateMember({
+  member,
+  children,
+}: DialogUpdateMemberProps) {
+  const [open, setOpen] = useState<boolean>()
+  const { toast } = useToast()
 
   const submit = async (form: FormData) => {
-    const newForm = await filterFormData(form);
-
-    const { error } = await JSON.parse(await updateMember(newForm));
+    const newForm = await filterFormData(form)
+    const { error } = await JSON.parse(await updateMember(newForm))
 
     if (error) {
-      toast({
-        title: "Não foi possível editar o membro!",
-      });
+      toastApiError(toast, error, 'Não foi possível editar o membro!')
     } else {
-      toast({
-        title: "Membro editado com sucesso!",
-      });
-      setOpen(false);
+      toast({ title: 'Membro editado com sucesso!' })
+      setOpen(false)
     }
-  };
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -53,7 +52,7 @@ export function DialogUpdateMember({ member, children }: DialogUpdateMemberProps
             &quot;Salvar&quot; para aplicar as alterações.
           </DialogDescription>
         </DialogHeader>
-        <form action={submit}>
+        <form action={submit} encType="multipart/form-data">
           {member ? (
             <FormFieldsMember member={member} />
           ) : (
@@ -62,5 +61,5 @@ export function DialogUpdateMember({ member, children }: DialogUpdateMemberProps
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

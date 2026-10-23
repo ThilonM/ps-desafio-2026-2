@@ -12,6 +12,7 @@ import {
   DialogFooter,
 } from '@/components/dialog'
 import { useToast } from '@/components/use-toast'
+import { toastApiError } from '@/services/toast-api-error'
 import { useState } from 'react'
 
 interface DialogDeleteMemberProps {
@@ -27,9 +28,7 @@ export function DialogMemberDelete({ id, children }: DialogDeleteMemberProps) {
     const { error } = await JSON.parse(await destroyMember(id))
 
     if (error) {
-      toast({
-        title: 'Não foi possível excluir o membro!',
-      })
+      toastApiError(toast, error, 'Não foi possível excluir o membro!')
     } else {
       toast({
         title: 'Membro excluído com sucesso!',

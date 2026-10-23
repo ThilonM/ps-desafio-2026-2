@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
   DialogHeader,
@@ -11,6 +11,7 @@ import {
 import FormFieldsProjeto from './form-fields-project'
 import { updateProjeto } from '@/actions/projeto'
 import { filterFormData } from '@/services/filter-form-data'
+import { toastApiError } from '@/services/toast-api-error'
 import { useState } from 'react'
 import { useToast } from '@/components/use-toast'
 import { projetoType } from '@/types/projeto'
@@ -20,7 +21,10 @@ interface DialogUpdateProjetoProps {
   children: React.ReactNode
 }
 
-export function DialogUpdateProjeto({ projeto, children }: DialogUpdateProjetoProps) {
+export function DialogUpdateProjeto({
+  projeto,
+  children,
+}: DialogUpdateProjetoProps) {
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
@@ -29,7 +33,7 @@ export function DialogUpdateProjeto({ projeto, children }: DialogUpdateProjetoPr
     const { error } = await JSON.parse(await updateProjeto(newForm))
 
     if (error) {
-      toast({ title: 'Não foi possível editar o projeto!' })
+      toastApiError(toast, error, 'Não foi possível editar o projeto!')
     } else {
       toast({ title: 'Projeto editado com sucesso!' })
       setOpen(false)

@@ -12,6 +12,7 @@ import {
   DialogFooter,
 } from '@/components/dialog'
 import { useToast } from '@/components/use-toast'
+import { toastApiError } from '@/services/toast-api-error'
 import { useState } from 'react'
 
 interface DialogDeleteProjetoProps {
@@ -27,7 +28,7 @@ export function DialogProjetoDelete({ id, children }: DialogDeleteProjetoProps) 
     const { error } = await JSON.parse(await destroyProjeto(id))
 
     if (error) {
-      toast({ title: 'Não foi possível excluir o projeto!' })
+      toastApiError(toast, error, 'Não foi possível excluir o projeto!')
     } else {
       toast({ title: 'Projeto excluído com sucesso!' })
     }

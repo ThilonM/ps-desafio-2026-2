@@ -11,6 +11,7 @@ import {
 import FormFieldsMember from './form-fields-member'
 import { createMember } from '@/actions/member'
 import { filterFormData } from '@/services/filter-form-data'
+import { toastApiError } from '@/services/toast-api-error'
 import { useState } from 'react'
 import { useToast } from '@/components/use-toast'
 
@@ -24,17 +25,12 @@ export function DialogCreateMember({ children }: DialogCreateMemberProps) {
 
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
-
     const { error } = await JSON.parse(await createMember(newForm))
 
     if (error) {
-      toast({
-        title: 'Não foi possível criar o membro!',
-      })
+      toastApiError(toast, error, 'Não foi possível criar o membro!')
     } else {
-      toast({
-        title: 'Membro criado com sucesso!',
-      })
+      toast({ title: 'Membro criado com sucesso!' })
       setOpen(false)
     }
   }
