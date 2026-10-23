@@ -12,7 +12,7 @@ import {
 import { api } from '@/services/api'
 import { formatDateBr } from '@/services/formatter'
 import { membroType } from '@/types/member'
-import { LuInfo, LuPen, LuCirclePlus, LuTrash } from 'react-icons/lu'
+import { LuInfo, LuPen, LuPlusCircle, LuTrash } from 'react-icons/lu'
 import { DialogUpdateMember } from './dialog-update-member'
 import { DialogMemberDelete } from './dialog-delete-member'
 import { DialogInformationMember } from './dialog-information-member'
@@ -56,7 +56,7 @@ export default async function ListMembers() {
       <DashboardContainer className="flex h-min justify-between space-x-0 gap-y-2.5 max-sm:flex-col">
         <DialogCreateMember>
           <Button size="sm">
-            <LuCirclePlus />
+            <LuPlusCircle />
             Novo membro
           </Button>
         </DialogCreateMember>
@@ -80,6 +80,9 @@ export default async function ListMembers() {
                 Cor: {member.cor_favorita || '-'} · Aniversário:{' '}
                 {formatDateBr(member.data_aniversario)}
               </p>
+              <p className="text-sm text-muted-foreground">
+                Projetos: {member.projetos?.length ?? 0}
+              </p>
             </div>
             <MemberActions member={member} />
           </article>
@@ -94,6 +97,7 @@ export default async function ListMembers() {
               <TableHead>E-mail</TableHead>
               <TableHead>Cor favorita</TableHead>
               <TableHead>Aniversário</TableHead>
+              <TableHead>Projetos</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
           </TableHeader>
@@ -104,6 +108,7 @@ export default async function ListMembers() {
                 <TableCell>{member.email}</TableCell>
                 <TableCell>{member.cor_favorita || '-'}</TableCell>
                 <TableCell>{formatDateBr(member.data_aniversario)}</TableCell>
+                <TableCell>{member.projetos?.length ?? 0}</TableCell>
                 <TableCell className="text-right">
                   <MemberActions member={member} />
                 </TableCell>

@@ -23,7 +23,11 @@ class MembroController extends Controller
      */
     public function index(): JsonResponse
     {
-        $membros = $this->membro->all();
+        $membros = $this->membro->newQuery()
+            ->with(['projetos' => fn ($q) => $q->orderBy('nome')])
+            ->orderBy('nome')
+            ->get();
+
         return response()->json($membros, Response::HTTP_OK);
     }
 
@@ -49,8 +53,10 @@ class MembroController extends Controller
      */
     public function show(String $id): JsonResponse
     {
-        $membro = $this->membro->findOrFail($id);
-    
+        $membro = $this->membro->newQuery()
+            ->with(['projetos' => fn ($q) => $q->orderBy('nome')])
+            ->findOrFail($id);
+
         return response()->json($membro, Response::HTTP_OK);
     }
 
@@ -63,6 +69,11 @@ class MembroController extends Controller
     {
         $validatedData = $request->validated();
         $membro = $this->membro->findOrFail($id);
+
+        // Senha em branco no edit = manter a atual
+        if (array_key_exists('senha', $validatedData) && blank($validatedData['senha'])) {
+            unset($validatedData['senha']);
+        }
 
         if ($request->hasFile('image')) {
             if ($membro->image) {

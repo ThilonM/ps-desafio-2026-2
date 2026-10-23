@@ -9,19 +9,22 @@ export async function createTarefa(form: FormData) {
   if (!res.error) {
     revalidatePath('/admin/tarefas')
     revalidatePath('/admin/projetos')
+    revalidatePath('/admin/membros')
   }
 
   return JSON.stringify(res)
 }
 
 export async function updateTarefa(form: FormData) {
-  const res = await api('PUT', `/tarefas/${form.get('id')}`, {
+  // POST + _method=PUT: PHP/Laravel não popula multipart em PUT real
+  const res = await api('POST', `/tarefas/${form.get('id')}`, {
     data: form,
   })
 
   if (!res.error) {
     revalidatePath('/admin/tarefas')
     revalidatePath('/admin/projetos')
+    revalidatePath('/admin/membros')
   }
 
   return JSON.stringify(res)
@@ -33,6 +36,7 @@ export async function destroyTarefa(id: string) {
   if (!res.error) {
     revalidatePath('/admin/tarefas')
     revalidatePath('/admin/projetos')
+    revalidatePath('/admin/membros')
   }
 
   return JSON.stringify(res)
@@ -46,6 +50,7 @@ export async function attachMembroProjeto(projetoId: string, form: FormData) {
   if (!res.error) {
     revalidatePath('/admin/projetos')
     revalidatePath('/admin/tarefas')
+    revalidatePath('/admin/membros')
   }
 
   return JSON.stringify(res)
@@ -57,6 +62,7 @@ export async function detachMembroProjeto(projetoId: string, membroId: string) {
   if (!res.error) {
     revalidatePath('/admin/projetos')
     revalidatePath('/admin/tarefas')
+    revalidatePath('/admin/membros')
   }
 
   return JSON.stringify(res)
