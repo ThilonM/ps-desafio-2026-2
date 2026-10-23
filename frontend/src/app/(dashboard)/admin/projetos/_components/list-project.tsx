@@ -13,7 +13,7 @@ import { api } from '@/services/api'
 import { formatDateBr } from '@/services/formatter'
 import { membroType } from '@/types/member'
 import { projetoType } from '@/types/projeto'
-import { LuInfo, LuPen, LuCirclePlus, LuTrash } from 'react-icons/lu'
+import { LuInfo, LuPen, LuPlusCircle, LuTrash } from 'react-icons/lu'
 import { DialogUpdateProjeto } from './dialog-update-project'
 import { DialogProjetoDelete } from './dialog-delete-project'
 import { DialogInformationProjeto } from './dialog-information-project'
@@ -68,7 +68,7 @@ export default async function ListProjects() {
       <DashboardContainer className="flex h-min justify-between space-x-0 gap-y-2.5 max-sm:flex-col">
         <DialogCreateProjeto>
           <Button size="sm">
-            <LuCirclePlus />
+            <LuPlusCircle />
             Novo projeto
           </Button>
         </DialogCreateProjeto>

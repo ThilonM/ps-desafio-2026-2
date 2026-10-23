@@ -13,7 +13,7 @@ import {
 } from '@/components/dashboard/sidebar'
 import {
   LuClipboard,
-  LuHouse,
+  LuHome,
   LuListChecks,
   LuLogOut,
   LuUsers,
@@ -29,13 +29,13 @@ export function SidebarMain() {
   return (
     <Sidebar>
       <SidebarHeader href="/admin">
-        <SidebarHeaderLogo src={logo} alt="Logo Dashboard" />
+        <SidebarHeaderLogo src={logo} alt="Logo Adapti" />
         <SidebarHeaderTitle>Adapti</SidebarHeaderTitle>
       </SidebarHeader>
       <SidebarNav>
         <SidebarNavLink href="/admin">
-          <LuHouse />
-          <SidebarNavLinkLabel>Home</SidebarNavLinkLabel>
+          <LuHome />
+          <SidebarNavLinkLabel>Início</SidebarNavLinkLabel>
         </SidebarNavLink>
         <SidebarNavLink href="/admin/membros">
           <LuUsers />
@@ -54,7 +54,7 @@ export function SidebarMain() {
         <UserDropdown name={user?.name} email={user?.email} src={user?.image}>
           <DropdownMenuItem onClick={async () => await signOut()}>
             <LuLogOut className="mr-3 h-3 w-3" />
-            Log out
+            Sair
           </DropdownMenuItem>
         </UserDropdown>
       </SidebarFooter>

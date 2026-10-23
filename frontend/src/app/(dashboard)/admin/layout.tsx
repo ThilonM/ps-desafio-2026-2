@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { AdminShell } from './_components/admin-shell'
 
 export const metadata: Metadata = {
-  title: 'Dashboard',
+  title: 'Painel administrativo',
 }
 
 export default async function AdminLayout({

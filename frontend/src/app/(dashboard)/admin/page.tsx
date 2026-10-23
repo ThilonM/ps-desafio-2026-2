@@ -7,7 +7,7 @@ import {
 import { api } from '@/services/api'
 import { membroType } from '@/types/member'
 import { projetoType } from '@/types/projeto'
-import { LuHouse } from 'react-icons/lu'
+import { LuHome } from 'react-icons/lu'
 import { DashboardSummaryCards } from './_components/dashboard-summary-cards'
 
 export default async function Page() {
@@ -20,7 +20,7 @@ export default async function Page() {
     <>
       <DashboardHeader>
         <DashboardHeaderTitle>
-          <LuHouse />
+          <LuHome />
           Sistema de Gestão de Projetos MEJ
         </DashboardHeaderTitle>
         <DashboardHeaderDescription>

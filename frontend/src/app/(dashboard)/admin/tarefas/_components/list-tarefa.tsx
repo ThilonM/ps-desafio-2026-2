@@ -13,7 +13,7 @@ import { api } from '@/services/api'
 import { membroType } from '@/types/member'
 import { projetoType } from '@/types/projeto'
 import { TAREFA_STATUS_LABELS, tarefaType } from '@/types/tarefa'
-import { LuCirclePlus, LuPen, LuTrash } from 'react-icons/lu'
+import { LuPlusCircle, LuPen, LuTrash } from 'react-icons/lu'
 import { DialogCreateTarefa } from './dialog-create-tarefa'
 import { DialogUpdateTarefa } from './dialog-update-tarefa'
 import { DialogTarefaDelete } from './dialog-delete-tarefa'
@@ -71,7 +71,7 @@ export default async function ListTarefas() {
       <DashboardContainer className="flex h-min justify-between space-x-0 gap-y-2.5 max-sm:flex-col">
         <DialogCreateTarefa projetos={projetos} membros={membros}>
           <Button size="sm">
-            <LuCirclePlus />
+            <LuPlusCircle />
             Nova tarefa
           </Button>
         </DialogCreateTarefa>
@@ -97,7 +97,8 @@ export default async function ListTarefas() {
                 Membro: {tarefa.membro?.nome ?? '-'}
               </p>
               <p className="text-sm text-muted-foreground">
-                Status: {TAREFA_STATUS_LABELS[tarefa.status] ?? tarefa.status}
+                Situação:{' '}
+                {TAREFA_STATUS_LABELS[tarefa.status] ?? tarefa.status}
               </p>
             </div>
             <TarefaActions
@@ -116,7 +117,7 @@ export default async function ListTarefas() {
               <TableHead>Título</TableHead>
               <TableHead>Projeto</TableHead>
               <TableHead>Membro</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>Situação</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
           </TableHeader>
