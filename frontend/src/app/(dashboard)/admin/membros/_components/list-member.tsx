@@ -97,7 +97,7 @@ export default async function ListMembers() {
               <TableHead>E-mail</TableHead>
               <TableHead>Cor favorita</TableHead>
               <TableHead>Aniversário</TableHead>
-              <TableHead>Projetos</TableHead>
+              <TableHead className="text-center">Projetos</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
           </TableHeader>
@@ -108,7 +108,9 @@ export default async function ListMembers() {
                 <TableCell>{member.email}</TableCell>
                 <TableCell>{member.cor_favorita || '-'}</TableCell>
                 <TableCell>{formatDateBr(member.data_aniversario)}</TableCell>
-                <TableCell>{member.projetos?.length ?? 0}</TableCell>
+                <TableCell className="text-center">
+                  {member.projetos?.length ?? 0}
+                </TableCell>
                 <TableCell className="text-right">
                   <MemberActions member={member} />
                 </TableCell>
