@@ -21,7 +21,8 @@ class ProjetoController extends Controller
      */
     public function index(): JsonResponse
     {
-        $projetos = Projeto::all();
+        $projetos = Projeto::query()->with('membros')->get();
+
         return response()->json($projetos, Response::HTTP_OK);
     }
 
@@ -39,7 +40,10 @@ class ProjetoController extends Controller
      */
     public function show(String $id): JsonResponse
     {
-        $projeto = Projeto::findOrFail($id);
+        $projeto = Projeto::query()
+            ->with(['membros', 'tarefas.membro:id,nome,email'])
+            ->findOrFail($id);
+
         return response()->json($projeto, Response::HTTP_OK);
     }
 
