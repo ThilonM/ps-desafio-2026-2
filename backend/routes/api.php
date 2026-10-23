@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjetoMembroController;
+use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,5 +24,10 @@ Route::get('/', function () {
 
 Route::apiResource('/membros', \App\Http\Controllers\MembroController::class);
 Route::apiResource('/projetos', \App\Http\Controllers\ProjetoController::class);
+Route::apiResource('/tarefas', TarefaController::class);
+
+Route::get('/projetos/{projeto}/membros', [ProjetoMembroController::class, 'index']);
+Route::post('/projetos/{projeto}/membros', [ProjetoMembroController::class, 'store']);
+Route::delete('/projetos/{projeto}/membros/{membro}', [ProjetoMembroController::class, 'destroy']);
 
 require __DIR__.'/auth.php';
