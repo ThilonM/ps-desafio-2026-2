@@ -1,38 +1,41 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/button";
+import { Button } from '@/components/button'
 import {
   FormFieldsGroup,
   FormField,
   ImageForm,
   handleImageChange,
-} from "@/components/dashboard/form";
-import { DialogFooter } from "@/components/dialog";
-import { Input } from "@/components/input";
-import { Label } from "@/components/label";
-import { cn } from "@/lib/utils";
-import { membroType } from "@/types/member";
-import { useState } from "react";
-import { useFormStatus } from "react-dom";
+} from '@/components/dashboard/form'
+import { DialogFooter } from '@/components/dialog'
+import { Input } from '@/components/input'
+import { Label } from '@/components/label'
+import { cn } from '@/lib/utils'
+import { toDateInputValue } from '@/services/formatter'
+import { membroType } from '@/types/member'
+import { useState } from 'react'
+import { useFormStatus } from 'react-dom'
 
 interface FormFieldsMemberProps {
-  member?: membroType;
-  readOnly?: boolean;
+  member?: membroType
+  readOnly?: boolean
 }
 
 export default function FormFieldsMember({
   member,
   readOnly,
 }: FormFieldsMemberProps) {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     member?.image,
-  );
+  )
 
   return (
     <>
       <FormFieldsGroup>
-        {member && <Input defaultValue={member.id} type="text" name="id" hidden />}
+        {member && (
+          <Input defaultValue={member.id} type="text" name="id" hidden />
+        )}
         <FormField>
           <Label htmlFor="nome">Nome</Label>
           <Input
@@ -53,6 +56,7 @@ export default function FormFieldsMember({
             id="email"
             type="email"
             placeholder="Insira o e-mail"
+            defaultValue={member?.email}
             disabled={pending}
             readOnly={readOnly}
             required
@@ -65,7 +69,9 @@ export default function FormFieldsMember({
             name="senha"
             id="senha"
             type="password"
-            placeholder="Insira a senha"
+            placeholder={
+              member ? 'Deixe em branco para manter' : 'Insira a senha'
+            }
             disabled={pending}
             readOnly={readOnly}
             required={!member}
@@ -81,7 +87,6 @@ export default function FormFieldsMember({
             defaultValue={member?.cor_favorita}
             disabled={pending}
             readOnly={readOnly}
-            required
             minLength={2}
           />
         </FormField>
@@ -91,10 +96,9 @@ export default function FormFieldsMember({
             name="data_aniversario"
             id="data_aniversario"
             type="date"
-            defaultValue={member?.data_aniversario}
+            defaultValue={toDateInputValue(member?.data_aniversario)}
             disabled={pending}
             readOnly={readOnly}
-            required
           />
         </FormField>
         <FormField>
@@ -123,5 +127,5 @@ export default function FormFieldsMember({
         </Button>
       </DialogFooter>
     </>
-  );
+  )
 }

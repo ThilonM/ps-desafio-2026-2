@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { Button } from '@/components/button'
 import { FormFieldsGroup, FormField } from '@/components/dashboard/form'
@@ -6,6 +6,7 @@ import { DialogFooter } from '@/components/dialog'
 import { Input } from '@/components/input'
 import { Label } from '@/components/label'
 import { cn } from '@/lib/utils'
+import { toDateInputValue } from '@/services/formatter'
 import { projetoType } from '@/types/projeto'
 import { useFormStatus } from 'react-dom'
 
@@ -23,7 +24,9 @@ export default function FormFieldsProjeto({
   return (
     <>
       <FormFieldsGroup>
-        {projeto && <Input defaultValue={projeto.id} type="text" name="id" hidden />}
+        {projeto && (
+          <Input defaultValue={projeto.id} type="text" name="id" hidden />
+        )}
         <FormField>
           <Label htmlFor="nome">Nome</Label>
           <Input
@@ -63,7 +66,7 @@ export default function FormFieldsProjeto({
             name="data_inicio"
             id="data_inicio"
             type="date"
-            defaultValue={projeto?.data_inicio}
+            defaultValue={toDateInputValue(projeto?.data_inicio)}
             disabled={pending}
             readOnly={readOnly}
           />
@@ -74,7 +77,7 @@ export default function FormFieldsProjeto({
             name="data_fim"
             id="data_fim"
             type="date"
-            defaultValue={projeto?.data_fim}
+            defaultValue={toDateInputValue(projeto?.data_fim)}
             disabled={pending}
             readOnly={readOnly}
           />
