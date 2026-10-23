@@ -1,3 +1,5 @@
+import { membroType } from '@/types/member'
+
 export type projetoType = {
   id: string
   nome: string
@@ -7,4 +9,5 @@ export type projetoType = {
   data_fim: string
   created_at?: string
   updated_at?: string
+  membros?: membroType[]
 }
