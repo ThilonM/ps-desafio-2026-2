@@ -1,4 +1,4 @@
-# Correções do backend (Missão 1) — guia para leigo
+﻿# Correções do backend (Parte 1 (manutenção)) — guia para leigo
 
 **PS Adapti 2026.2 · 4ª etapa · material de estudo do Thilon**
 
@@ -422,7 +422,7 @@ Route::apiResource('/projetos', \App\Http\Controllers\ProjetoController::class);
 
 Isso é para página HTML (Blade). Este projeto é **API JSON**. Essas duas rotas extra não têm tela. `apiResource` deixa só: index, store, show, update, destroy — o que o Next usa.
 
-**Observação (não mudamos de propósito):** essas rotas **não** estão dentro do `auth:sanctum` (linhas 9–17). O template original deixou Projetos/Membros públicos. Não misturamos isso nesta missão.
+**Observação (não mudamos de propósito):** essas rotas **não** estão dentro do `auth:sanctum` (linhas 9–17). O template original deixou Projetos/Membros públicos. Não misturamos isso nesta etapa.
 
 Prefixo da API neste projeto é **vazio** (`bootstrap/app.php`, `apiPrefix: ''`). Então a URL real é `http://127.0.0.1:8000/projetos`, **sem** `/api`.
 
@@ -499,7 +499,7 @@ Não era o bug do edital. Faz o Eloquent tratar as colunas como data. O `withVal
 ## 15. Frases prontas para a apresentação
 
 - “Form Request é o porteiro. Controller não valida data; `StoreProjetoRequest` linha 21 tem `after_or_equal`.”
-- “Update de projeto dava 403 porque `authorize` era false na linha 13 de `UpdateProjetoRequest`. Não era permissão de usuário: era o arquivo de request trancado.”
+- “Update de projeto dava 403 porque `authorize` era false na linha 13 de `UpdateProjetoRequest`. Não era peretapa de usuário: era o arquivo de request trancado.”
 - “PATCH só com data fim usa `withValidator` linhas 27–51, porque `after_or_equal` não enxerga o banco.”
 - “Senha: validada no request, descartada no model. Mass assignment. Fillable linha 16 de `Membro.php`.”
 - “Hash: cast `hashed` linha 29, igual o User do template. `$hidden` linha 23 esconde no JSON.”
@@ -511,11 +511,11 @@ Não era o bug do edital. Faz o Eloquent tratar as colunas como data. O `withVal
 ## 16. O que propositalmente ficou para depois
 
 - Frontend (tabela no celular, hidratação, toasts).
-- Tarefas, pivot membro–projeto, trava de 2 projetos ativos (Missão 2).
+- Tarefas, pivot membro–projeto, trava de 2 projetos ativos (Parte 2 (tarefas)).
 - Sanctum nessas rotas (o template deixou público).
-- README / prints da entrega (Missão 3).
+- README / prints da entrega (etapa 3).
 
-A Missão 2 vai **depender** desta base: se create de membro ainda fosse 403, tarefa atribuída a membro nem nascia.
+A Parte 2 (tarefas) vai **depender** desta base: se create de membro ainda fosse 403, tarefa atribuída a membro nem nascia.
 
 ---
 
