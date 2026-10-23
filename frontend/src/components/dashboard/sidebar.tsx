@@ -24,7 +24,7 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        'bg-card h-screen w-full flex flex-col border-r z-50',
+        'bg-card flex h-screen w-full flex-col border-r',
         className,
       )}
       {...props}
