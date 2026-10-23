@@ -10,12 +10,35 @@ import {
   TableRow,
 } from '@/components/dashboard/table'
 import { api } from '@/services/api'
+import { formatDateBr } from '@/services/formatter'
 import { membroType } from '@/types/member'
 import { LuInfo, LuPen, LuCirclePlus, LuTrash } from 'react-icons/lu'
 import { DialogUpdateMember } from './dialog-update-member'
 import { DialogMemberDelete } from './dialog-delete-member'
 import { DialogInformationMember } from './dialog-information-member'
 import { DialogCreateMember } from './dialog-create-member'
+
+function MemberActions({ member }: { member: membroType }) {
+  return (
+    <div className="flex flex-wrap justify-end gap-2">
+      <DialogInformationMember member={member}>
+        <Button variant="default-inverse" size="icon">
+          <LuInfo />
+        </Button>
+      </DialogInformationMember>
+      <DialogUpdateMember member={member}>
+        <Button variant="secondary-inverse" size="icon">
+          <LuPen />
+        </Button>
+      </DialogUpdateMember>
+      <DialogMemberDelete id={member.id}>
+        <Button variant="destructive-inverse" size="icon">
+          <LuTrash />
+        </Button>
+      </DialogMemberDelete>
+    </div>
+  )
+}
 
 export default async function ListMembers() {
   const { response } = await api<membroType[]>('GET', '/membros')
@@ -38,7 +61,32 @@ export default async function ListMembers() {
           </Button>
         </DialogCreateMember>
       </DashboardContainer>
-      <DashboardContainer>
+
+      <DashboardContainer className="space-y-3 md:hidden">
+        {!response.length && (
+          <p className="text-sm text-muted-foreground">
+            Nenhum membro encontrado.
+          </p>
+        )}
+        {response.map((member) => (
+          <article
+            key={member.id}
+            className="space-y-3 border-b border-border pb-4 last:border-0 last:pb-0"
+          >
+            <div className="space-y-1">
+              <p className="font-semibold leading-tight">{member.nome}</p>
+              <p className="text-sm text-muted-foreground">{member.email}</p>
+              <p className="text-sm text-muted-foreground">
+                Cor: {member.cor_favorita || '-'} · Aniversário:{' '}
+                {formatDateBr(member.data_aniversario)}
+              </p>
+            </div>
+            <MemberActions member={member} />
+          </article>
+        ))}
+      </DashboardContainer>
+
+      <DashboardContainer className="hidden md:block">
         <Table>
           <TableHeader>
             <TableRow>
@@ -55,27 +103,9 @@ export default async function ListMembers() {
                 <TableCell>{member.nome}</TableCell>
                 <TableCell>{member.email}</TableCell>
                 <TableCell>{member.cor_favorita || '-'}</TableCell>
-                <TableCell>
-                  {member.data_aniversario
-                    ? new Date(member.data_aniversario).toLocaleDateString('pt-BR')
-                    : '-'}
-                </TableCell>
-                <TableCell className="flex justify-end gap-2">
-                  <DialogInformationMember member={member}>
-                    <Button variant="default-inverse" size="icon">
-                      <LuInfo />
-                    </Button>
-                  </DialogInformationMember>
-                  <DialogUpdateMember member={member}>
-                    <Button variant="secondary-inverse" size="icon">
-                      <LuPen />
-                    </Button>
-                  </DialogUpdateMember>
-                  <DialogMemberDelete id={member.id}>
-                    <Button variant="destructive-inverse" size="icon">
-                      <LuTrash />
-                    </Button>
-                  </DialogMemberDelete>
+                <TableCell>{formatDateBr(member.data_aniversario)}</TableCell>
+                <TableCell className="text-right">
+                  <MemberActions member={member} />
                 </TableCell>
               </TableRow>
             ))}
