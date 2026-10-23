@@ -19,10 +19,52 @@ class TarefaController extends Controller
 
     public function index(): JsonResponse
     {
+        $statusOrdem = [
+            Tarefa::STATUS_PENDENTE => 0,
+            Tarefa::STATUS_EM_ANDAMENTO => 1,
+            Tarefa::STATUS_CONCLUIDA => 2,
+        ];
+
         $tarefas = Tarefa::query()
             ->with(['projeto:id,nome', 'membro:id,nome,email'])
-            ->orderByDesc('created_at')
-            ->get();
+            ->get()
+            ->sort(function (Tarefa $a, Tarefa $b) use ($statusOrdem) {
+                // 1) Concluídas no final
+                $aConcluida = $a->status === Tarefa::STATUS_CONCLUIDA ? 1 : 0;
+                $bConcluida = $b->status === Tarefa::STATUS_CONCLUIDA ? 1 : 0;
+                if ($aConcluida !== $bConcluida) {
+                    return $aConcluida <=> $bConcluida;
+                }
+
+                // 2) Nome do projeto (A–Z)
+                $cmpProjeto = strcasecmp(
+                    (string) ($a->projeto?->nome ?? ''),
+                    (string) ($b->projeto?->nome ?? ''),
+                );
+                if ($cmpProjeto !== 0) {
+                    return $cmpProjeto;
+                }
+
+                // 3) Situação: Pendente → Em andamento → Concluída
+                $cmpStatus = ($statusOrdem[$a->status] ?? 99)
+                    <=> ($statusOrdem[$b->status] ?? 99);
+                if ($cmpStatus !== 0) {
+                    return $cmpStatus;
+                }
+
+                // 4) Nome do membro (A–Z)
+                $cmpMembro = strcasecmp(
+                    (string) ($a->membro?->nome ?? ''),
+                    (string) ($b->membro?->nome ?? ''),
+                );
+                if ($cmpMembro !== 0) {
+                    return $cmpMembro;
+                }
+
+                // Desempate: título da tarefa (A–Z)
+                return strcasecmp((string) $a->titulo, (string) $b->titulo);
+            })
+            ->values();
 
         return response()->json($tarefas, Response::HTTP_OK);
     }
