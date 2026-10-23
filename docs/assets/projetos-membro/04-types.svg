@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="356" viewBox="0 0 560 356">
+  <defs>
+    <style>
+      .bg { fill: #1e1e2e; }
+      .bar { fill: #181825; }
+      .dot-r { fill: #f38ba8; }
+      .dot-y { fill: #f9e2af; }
+      .dot-g { fill: #a6e3a1; }
+      .title { fill: #cdd6f4; font: 600 12px Consolas, 'Courier New', monospace; }
+      .ln { fill: #6c7086; font: 12px Consolas, 'Courier New', monospace; text-anchor: end; }
+      .code { fill: #cdd6f4; font: 12px Consolas, 'Courier New', monospace; white-space: pre; }
+      .gutter { fill: #11111b; }
+    </style>
+  </defs>
+  <rect class="bg" width="100%" height="100%" rx="10" ry="10"/>
+  <rect class="bar" width="100%" height="34" rx="10" ry="10"/>
+  <rect class="bar" y="20" width="100%" height="14"/>
+  <circle class="dot-r" cx="18" cy="17" r="5"/>
+  <circle class="dot-y" cx="36" cy="17" r="5"/>
+  <circle class="dot-g" cx="54" cy="17" r="5"/>
+  <text class="title" x="74" y="21">frontend/src/types/member.ts</text>
+  <rect class="gutter" x="0" y="34" width="44" height="322"/>
+  
+      <text x="24" y="48" class="ln">1</text>
+      <text x="60" y="48" class="code">export type membroProjetoType = {</text>
+      <text x="24" y="66" class="ln">2</text>
+      <text x="60" y="66" class="code">  id: string</text>
+      <text x="24" y="84" class="ln">3</text>
+      <text x="60" y="84" class="code">  nome: string</text>
+      <text x="24" y="102" class="ln">4</text>
+      <text x="60" y="102" class="code">  nome_cliente: string</text>
+      <text x="24" y="120" class="ln">5</text>
+      <text x="60" y="120" class="code">  descricao: string</text>
+      <text x="24" y="138" class="ln">6</text>
+      <text x="60" y="138" class="code">  data_inicio: string</text>
+      <text x="24" y="156" class="ln">7</text>
+      <text x="60" y="156" class="code">  data_fim: string</text>
+      <text x="24" y="174" class="ln">8</text>
+      <text x="60" y="174" class="code">}</text>
+      <text x="24" y="192" class="ln">9</text>
+      <text x="60" y="192" class="code"> </text>
+      <text x="24" y="210" class="ln">10</text>
+      <text x="60" y="210" class="code">export type membroType = {</text>
+      <text x="24" y="228" class="ln">11</text>
+      <text x="60" y="228" class="code">  id: string</text>
+      <text x="24" y="246" class="ln">12</text>
+      <text x="60" y="246" class="code">  nome: string</text>
+      <text x="24" y="264" class="ln">13</text>
+      <text x="60" y="264" class="code">  email: string</text>
+      <text x="24" y="282" class="ln">14</text>
+      <text x="60" y="282" class="code">  // ... demais campos</text>
+      <text x="24" y="300" class="ln">15</text>
+      <text x="60" y="300" class="code">  projetos?: membroProjetoType[]</text>
+      <text x="24" y="318" class="ln">16</text>
+      <text x="60" y="318" class="code">}</text>
+</svg>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="731.1999999999999" height="626" viewBox="0 0 731.1999999999999 626">
+  <defs>
+    <style>
+      .bg { fill: #1e1e2e; }
+      .bar { fill: #181825; }
+      .dot-r { fill: #f38ba8; }
+      .dot-y { fill: #f9e2af; }
+      .dot-g { fill: #a6e3a1; }
+      .title { fill: #cdd6f4; font: 600 12px Consolas, 'Courier New', monospace; }
+      .ln { fill: #6c7086; font: 12px Consolas, 'Courier New', monospace; text-anchor: end; }
+      .code { fill: #cdd6f4; font: 12px Consolas, 'Courier New', monospace; white-space: pre; }
+      .gutter { fill: #11111b; }
+    </style>
+  </defs>
+  <rect class="bg" width="100%" height="100%" rx="10" ry="10"/>
+  <rect class="bar" width="100%" height="34" rx="10" ry="10"/>
+  <rect class="bar" y="20" width="100%" height="14"/>
+  <circle class="dot-r" cx="18" cy="17" r="5"/>
+  <circle class="dot-y" cx="36" cy="17" r="5"/>
+  <circle class="dot-g" cx="54" cy="17" r="5"/>
+  <text class="title" x="74" y="21">frontend/.../membros/_components/member-projetos.tsx</text>
+  <rect class="gutter" x="0" y="34" width="44" height="592"/>
+  
+      <text x="24" y="48" class="ln">1</text>
+      <text x="60" y="48" class="code">export function MemberProjetos({ projetos = [] }: MemberProjetosProps) {</text>
+      <text x="24" y="66" class="ln">2</text>
+      <text x="60" y="66" class="code">  return (</text>
+      <text x="24" y="84" class="ln">3</text>
+      <text x="60" y="84" class="code">    &lt;div className=&quot;space-y-3 border-t border-border pt-4&quot;&gt;</text>
+      <text x="24" y="102" class="ln">4</text>
+      <text x="60" y="102" class="code">      &lt;div&gt;</text>
+      <text x="24" y="120" class="ln">5</text>
+      <text x="60" y="120" class="code">        &lt;p className=&quot;text-sm font-medium&quot;&gt;Projetos do membro&lt;/p&gt;</text>
+      <text x="24" y="138" class="ln">6</text>
+      <text x="60" y="138" class="code">        &lt;p className=&quot;text-xs text-muted-foreground&quot;&gt;</text>
+      <text x="24" y="156" class="ln">7</text>
+      <text x="60" y="156" class="code">          Todos os projetos em que este membro está alocado.</text>
+      <text x="24" y="174" class="ln">8</text>
+      <text x="60" y="174" class="code">        &lt;/p&gt;</text>
+      <text x="24" y="192" class="ln">9</text>
+      <text x="60" y="192" class="code">      &lt;/div&gt;</text>
+      <text x="24" y="210" class="ln">10</text>
+      <text x="60" y="210" class="code">      {!projetos.length &amp;&amp; (</text>
+      <text x="24" y="228" class="ln">11</text>
+      <text x="60" y="228" class="code">        &lt;p className=&quot;text-sm text-muted-foreground&quot;&gt;</text>
+      <text x="24" y="246" class="ln">12</text>
+      <text x="60" y="246" class="code">          Este membro ainda não está em nenhum projeto.</text>
+      <text x="24" y="264" class="ln">13</text>
+      <text x="60" y="264" class="code">        &lt;/p&gt;</text>
+      <text x="24" y="282" class="ln">14</text>
+      <text x="60" y="282" class="code">      )}</text>
+      <text x="24" y="300" class="ln">15</text>
+      <text x="60" y="300" class="code">      &lt;ul className=&quot;space-y-3&quot;&gt;</text>
+      <text x="24" y="318" class="ln">16</text>
+      <text x="60" y="318" class="code">        {projetos.map((projeto) =&gt; (</text>
+      <text x="24" y="336" class="ln">17</text>
+      <text x="60" y="336" class="code">          &lt;li key={projeto.id} className=&quot;space-y-1 border-b ...&quot;&gt;</text>
+      <text x="24" y="354" class="ln">18</text>
+      <text x="60" y="354" class="code">            &lt;p className=&quot;text-sm font-medium&quot;&gt;{projeto.nome}&lt;/p&gt;</text>
+      <text x="24" y="372" class="ln">19</text>
+      <text x="60" y="372" class="code">            &lt;p className=&quot;text-xs ...&quot;&gt;Cliente: {projeto.nome_cliente}&lt;/p&gt;</text>
+      <text x="24" y="390" class="ln">20</text>
+      <text x="60" y="390" class="code">            &lt;p className=&quot;text-xs ...&quot;&gt;</text>
+      <text x="24" y="408" class="ln">21</text>
+      <text x="60" y="408" class="code">              {formatDateBr(projeto.data_inicio)} — {formatDateBr(projeto.data_fim)}</text>
+      <text x="24" y="426" class="ln">22</text>
+      <text x="60" y="426" class="code">            &lt;/p&gt;</text>
+      <text x="24" y="444" class="ln">23</text>
+      <text x="60" y="444" class="code">            {projeto.descricao &amp;&amp; (</text>
+      <text x="24" y="462" class="ln">24</text>
+      <text x="60" y="462" class="code">              &lt;p className=&quot;text-sm ...&quot;&gt;{projeto.descricao}&lt;/p&gt;</text>
+      <text x="24" y="480" class="ln">25</text>
+      <text x="60" y="480" class="code">            )}</text>
+      <text x="24" y="498" class="ln">26</text>
+      <text x="60" y="498" class="code">          &lt;/li&gt;</text>
+      <text x="24" y="516" class="ln">27</text>
+      <text x="60" y="516" class="code">        ))}</text>
+      <text x="24" y="534" class="ln">28</text>
+      <text x="60" y="534" class="code">      &lt;/ul&gt;</text>
+      <text x="24" y="552" class="ln">29</text>
+      <text x="60" y="552" class="code">    &lt;/div&gt;</text>
+      <text x="24" y="570" class="ln">30</text>
+      <text x="60" y="570" class="code">  )</text>
+      <text x="24" y="588" class="ln">31</text>
+      <text x="60" y="588" class="code">}</text>
+</svg>
