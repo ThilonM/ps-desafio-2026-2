@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   Sidebar,
@@ -10,15 +10,21 @@ import {
   SidebarFooter,
   SidebarHeaderLogo,
   UserDropdown,
-} from "@/components/dashboard/sidebar";
-import { LuClipboard, LuHouse, LuLogOut, LuUsers } from "react-icons/lu";
-import { DropdownMenuItem } from "@/components/dropdown-menu";
-import { signOut, useSession } from "next-auth/react";
-import logo from "@/assets/img/logo.jpeg";
+} from '@/components/dashboard/sidebar'
+import {
+  LuClipboard,
+  LuHouse,
+  LuListChecks,
+  LuLogOut,
+  LuUsers,
+} from 'react-icons/lu'
+import { DropdownMenuItem } from '@/components/dropdown-menu'
+import { signOut, useSession } from 'next-auth/react'
+import logo from '@/assets/img/logo.jpeg'
 
 export function SidebarMain() {
-  const session = useSession();
-  const user = session?.data?.user;
+  const session = useSession()
+  const user = session?.data?.user
 
   return (
     <Sidebar>
@@ -39,15 +45,19 @@ export function SidebarMain() {
           <LuClipboard />
           <SidebarNavLinkLabel>Projetos</SidebarNavLinkLabel>
         </SidebarNavLink>
+        <SidebarNavLink href="/admin/tarefas">
+          <LuListChecks />
+          <SidebarNavLinkLabel>Tarefas</SidebarNavLinkLabel>
+        </SidebarNavLink>
       </SidebarNav>
       <SidebarFooter>
         <UserDropdown name={user?.name} email={user?.email} src={user?.image}>
           <DropdownMenuItem onClick={async () => await signOut()}>
-            <LuLogOut className="w-3 h-3 mr-3" />
+            <LuLogOut className="mr-3 h-3 w-3" />
             Log out
           </DropdownMenuItem>
         </UserDropdown>
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }
