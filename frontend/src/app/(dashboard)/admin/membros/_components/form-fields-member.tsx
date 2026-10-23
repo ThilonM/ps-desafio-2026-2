@@ -8,10 +8,10 @@ import {
   handleImageChange,
 } from '@/components/dashboard/form'
 import { DialogFooter } from '@/components/dialog'
+import { DateInputBr } from '@/components/date-input-br'
 import { Input } from '@/components/input'
 import { Label } from '@/components/label'
 import { cn } from '@/lib/utils'
-import { toDateInputValue } from '@/services/formatter'
 import { membroType } from '@/types/member'
 import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
@@ -37,7 +37,9 @@ export default function FormFieldsMember({
           <Input defaultValue={member.id} type="text" name="id" hidden />
         )}
         <FormField>
-          <Label htmlFor="nome">Nome</Label>
+          <Label htmlFor="nome" required>
+            Nome
+          </Label>
           <Input
             name="nome"
             id="nome"
@@ -50,7 +52,9 @@ export default function FormFieldsMember({
           />
         </FormField>
         <FormField>
-          <Label htmlFor="email">E-mail</Label>
+          <Label htmlFor="email" required>
+            E-mail
+          </Label>
           <Input
             name="email"
             id="email"
@@ -64,7 +68,9 @@ export default function FormFieldsMember({
           />
         </FormField>
         <FormField>
-          <Label htmlFor="senha">Senha</Label>
+          <Label htmlFor="senha" required={!member}>
+            Senha
+          </Label>
           <Input
             name="senha"
             id="senha"
@@ -75,7 +81,7 @@ export default function FormFieldsMember({
             disabled={pending}
             readOnly={readOnly}
             required={!member}
-            minLength={8}
+            minLength={member ? undefined : 8}
           />
         </FormField>
         <FormField>
@@ -92,11 +98,10 @@ export default function FormFieldsMember({
         </FormField>
         <FormField>
           <Label htmlFor="data_aniversario">Data de aniversário</Label>
-          <Input
+          <DateInputBr
             name="data_aniversario"
             id="data_aniversario"
-            type="date"
-            defaultValue={toDateInputValue(member?.data_aniversario)}
+            defaultValue={member?.data_aniversario}
             disabled={pending}
             readOnly={readOnly}
           />

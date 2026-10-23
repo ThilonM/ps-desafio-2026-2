@@ -34,9 +34,41 @@ const formatDateBr = (value?: string | Date | null): string => {
   return `${day}/${month}/${year}`
 }
 
+/** Valor inicial de input em dd/mm/yyyy (vazio se não houver data). */
+const toDateBrInputValue = (value?: string | Date | null): string => {
+  const formatted = formatDateBr(value)
+  return formatted === '-' ? '' : formatted
+}
+
+/**
+ * Converte dd/mm/yyyy → yyyy-mm-dd para a API.
+ * Se já estiver em ISO, devolve como está.
+ */
+const parseDateBrToIso = (value: string): string => {
+  const trimmed = value.trim()
+  const br = trimmed.match(/^(\d{2})\/(\d{2})\/(\d{4})$/)
+  if (br) {
+    const [, day, month, year] = br
+    return `${year}-${month}-${day}`
+  }
+  const iso = trimmed.match(/^(\d{4}-\d{2}-\d{2})/)
+  return iso ? iso[1] : trimmed
+}
+
+/** Máscara progressiva dd/mm/aaaa enquanto digita. */
+const maskDateBr = (raw: string): string => {
+  const digits = raw.replace(/\D/g, '').slice(0, 8)
+  if (digits.length <= 2) return digits
+  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`
+  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`
+}
+
 export {
   phoneReplace,
   whatsAppUrlReplace,
   toDateInputValue,
+  toDateBrInputValue,
   formatDateBr,
+  parseDateBrToIso,
+  maskDateBr,
 }
