@@ -50,6 +50,15 @@ class StoreMembroRequest extends FormRequest
         return [
             'email.unique' => 'Já existe um membro cadastrado com este e-mail.',
             'email.email' => 'Informe um e-mail válido.',
+            'senha.required' => 'Informe a senha.',
+            'senha.min' => 'A senha deve ter no mínimo :min caracteres.',
+            'senha.letters' => 'A senha deve conter pelo menos uma letra.',
+            'senha.mixed' => 'A senha deve conter letras maiúsculas e minúsculas.',
+            'senha.numbers' => 'A senha deve conter pelo menos um número.',
+            'senha.symbols' => 'A senha deve conter pelo menos um símbolo.',
+            'image.image' => 'Envie um arquivo de imagem válido.',
+            'image.mimes' => 'A imagem deve ser jpeg, png, jpg ou webp.',
+            'data_aniversario.date' => 'Informe uma data de aniversário válida.',
         ];
     }
 }

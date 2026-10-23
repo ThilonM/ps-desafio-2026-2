@@ -31,7 +31,16 @@ class UpdateTarefaRequest extends FormRequest
             'membro_id' => 'membro',
             'titulo' => 'título',
             'descricao' => 'descrição',
-            'status' => 'status',
+            'status' => 'situação',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'membro_id.required' => 'A tarefa deve ser atribuída a um membro.',
+            'projeto_id.required' => 'A tarefa deve estar vinculada a um projeto.',
+            'status.in' => 'Informe uma situação válida para a tarefa.',
         ];
     }
 }
