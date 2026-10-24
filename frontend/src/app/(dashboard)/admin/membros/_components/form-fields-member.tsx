@@ -108,21 +108,28 @@ export default function FormFieldsMember({
         </FormField>
         <FormField>
           <Label htmlFor="image">Imagem</Label>
-          <Input
-            name="image"
-            id="image"
-            type="file"
-            accept="image/*"
-            disabled={pending}
-            readOnly={readOnly}
-            onChange={(event) => handleImageChange(event, setImagePreview)}
-          />
-          {imagePreview && (
+          {!readOnly && (
+            <Input
+              name="image"
+              id="image"
+              type="file"
+              accept="image/*"
+              disabled={pending}
+              onChange={(event) => handleImageChange(event, setImagePreview)}
+            />
+          )}
+          {imagePreview ? (
             <ImageForm
               src={imagePreview}
-              alt="Pré-visualização da imagem do membro"
+              alt="Imagem do membro"
               className="max-h-48 w-full rounded border"
             />
+          ) : (
+            readOnly && (
+              <p className="col-span-3 text-left text-sm text-muted-foreground">
+                Nenhuma imagem cadastrada.
+              </p>
+            )
           )}
         </FormField>
       </FormFieldsGroup>
