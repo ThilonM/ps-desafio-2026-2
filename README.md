@@ -1,6 +1,6 @@
 # PS Desafio 2026.2 — Sistema de Gestão de Projetos MEJ
 
-Fork do template Adapti (Laravel 11 + Next.js 14) com correções da **Missão 1**, modelagem de **Tarefas** e **trava de alocação** da **Missão 2**, mais documentação, prints e diferenciais da **Missão 3**.
+(Laravel 11 + Next.js 14) Correções do projeto de onde foi feito Fork, modelagem de **Tarefas** e **trava de alocação**, mais documentação.
 
 **Credenciais padrão (após seed):** `test@example.com` / `password`
 
@@ -12,7 +12,7 @@ Fork do template Adapti (Laravel 11 + Next.js 14) com correções da **Missão 1
 
 ### Pré-requisitos
 
-- PHP 8.2+, Composer, MySQL (ou MariaDB)
+- PHP 8.2+, Composer, MySQL
 - Node.js 20+ e [pnpm](https://pnpm.io/pt/installation)
 
 ### Clone
@@ -65,7 +65,7 @@ Frontend em `http://127.0.0.1:3000`.
 
 ### Visão geral
 
-O template já traz **Projetos** e **Membros**. A Missão 2 exige **Tarefas** vinculadas a projeto + membro, relação **N:N** projeto↔membro e a regra de **no máximo 2 projetos ativos** por membro.
+O template já traz **Projetos** e **Membros**. Exige-se **Tarefas** vinculadas a projeto + membro, relação **N:N** projeto↔membro e a regra de **no máximo 2 projetos ativos** por membro.
 
 ### Modelagem (texto + diagrama)
 
@@ -189,7 +189,7 @@ node docs/capture-trava-422.mjs
 
 ---
 
-## 5. Extras (para o time avaliador)
+## 5. Extras
 
 | Extra | Onde verificar |
 |---|---|
