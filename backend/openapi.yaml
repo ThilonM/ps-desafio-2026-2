@@ -1,0 +1,254 @@
+openapi: 3.0.3
+info:
+  title: PS Desafio 2026.2 — API Adapti
+  description: |
+    API do sistema de gestão de projetos MEJ (Laravel 11).
+    Inclui Membros, Projetos, Tarefas e alocação com trava de no máximo
+    2 projetos ativos por membro.
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8000
+    description: Ambiente local
+tags:
+  - name: Auth
+  - name: Membros
+  - name: Projetos
+  - name: Tarefas
+  - name: Equipe
+paths:
+  /login:
+    post:
+      tags: [Auth]
+      summary: Autenticar e obter token Sanctum
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email, example: test@example.com }
+                password: { type: string, example: password }
+      responses:
+        '200':
+          description: Token gerado
+        '422':
+          description: Credenciais inválidas
+  /logout:
+    post:
+      tags: [Auth]
+      summary: Encerrar sessão / revogar token
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204':
+          description: Logout ok
+  /membros:
+    get:
+      tags: [Membros]
+      summary: Listar membros (com projetos alocados)
+      responses:
+        '200':
+          description: Lista de membros
+    post:
+      tags: [Membros]
+      summary: Criar membro
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [nome, email, senha]
+              properties:
+                nome: { type: string }
+                email: { type: string, format: email }
+                senha: { type: string }
+                cor_favorita: { type: string }
+                data_aniversario: { type: string, format: date }
+                image: { type: string, format: binary }
+      responses:
+        '201':
+          description: Criado
+        '422':
+          description: Validação falhou
+  /membros/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UuidId'
+    get:
+      tags: [Membros]
+      summary: Detalhar membro
+      responses:
+        '200':
+          description: Membro com projetos
+    put:
+      tags: [Membros]
+      summary: Atualizar membro (também aceita POST + _method=PUT)
+      responses:
+        '200':
+          description: Atualizado
+        '422':
+          description: Validação falhou
+    delete:
+      tags: [Membros]
+      summary: Excluir membro
+      responses:
+        '204':
+          description: Removido
+  /projetos:
+    get:
+      tags: [Projetos]
+      summary: Listar projetos (com membros)
+      responses:
+        '200':
+          description: Lista
+    post:
+      tags: [Projetos]
+      summary: Criar projeto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjetoInput'
+      responses:
+        '201':
+          description: Criado
+        '422':
+          description: data_fim anterior a data_inicio, etc.
+  /projetos/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UuidId'
+    get:
+      tags: [Projetos]
+      summary: Detalhar projeto
+      responses:
+        '200':
+          description: Projeto com membros e tarefas
+    put:
+      tags: [Projetos]
+      summary: Atualizar projeto
+      responses:
+        '200':
+          description: Atualizado
+    delete:
+      tags: [Projetos]
+      summary: Excluir projeto
+      responses:
+        '204':
+          description: Removido
+  /projetos/{id}/membros:
+    parameters:
+      - $ref: '#/components/parameters/UuidId'
+    get:
+      tags: [Equipe]
+      summary: Listar membros do projeto
+      responses:
+        '200':
+          description: Equipe
+    post:
+      tags: [Equipe]
+      summary: Alocar membro (trava de 2 projetos ativos)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [membro_id]
+              properties:
+                membro_id: { type: string, format: uuid }
+      responses:
+        '201':
+          description: Alocado
+        '422':
+          description: Membro já em 2 projetos ativos
+  /projetos/{projetoId}/membros/{membroId}:
+    delete:
+      tags: [Equipe]
+      summary: Remover membro do projeto
+      parameters:
+        - name: projetoId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: membroId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '204':
+          description: Removido
+  /tarefas:
+    get:
+      tags: [Tarefas]
+      summary: Listar tarefas (ordenadas)
+      responses:
+        '200':
+          description: Lista com projeto e membro
+    post:
+      tags: [Tarefas]
+      summary: Criar tarefa (aloca membro no projeto se necessário)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TarefaInput'
+      responses:
+        '201':
+          description: Criada
+        '422':
+          description: Título duplicado para o membro no projeto, ou trava de alocação
+  /tarefas/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UuidId'
+    get:
+      tags: [Tarefas]
+      summary: Detalhar tarefa
+      responses:
+        '200':
+          description: Tarefa
+    put:
+      tags: [Tarefas]
+      summary: Atualizar tarefa
+      responses:
+        '200':
+          description: Atualizada
+        '422':
+          description: Validação / trava / duplicidade
+    delete:
+      tags: [Tarefas]
+      summary: Excluir tarefa
+      responses:
+        '204':
+          description: Removida
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Sanctum
+  parameters:
+    UuidId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+  schemas:
+    ProjetoInput:
+      type: object
+      required: [nome, nome_cliente, descricao, data_inicio, data_fim]
+      properties:
+        nome: { type: string }
+        nome_cliente: { type: string }
+        descricao: { type: string }
+        data_inicio: { type: string, format: date }
+        data_fim: { type: string, format: date }
+    TarefaInput:
+      type: object
+      required: [projeto_id, membro_id, titulo]
+      properties:
+        projeto_id: { type: string, format: uuid }
+        membro_id: { type: string, format: uuid }
+        titulo: { type: string }
+        descricao: { type: string, nullable: true }
+        status:
+          type: string
+          enum: [pendente, em_andamento, concluida]

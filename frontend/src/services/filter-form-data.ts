@@ -12,7 +12,7 @@ export async function filterFormData(form: FormData) {
 
   let hasIdField = false
 
-  for (const [key, value] of form.entries()) {
+  for (const [key, value] of Array.from(form.entries())) {
     if (key === 'id') {
       hasIdField = true
     }

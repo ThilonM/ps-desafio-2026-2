@@ -2,3 +2,8 @@
 .vscode
 .idea
 .fleet
+
+# deps locais de scripts em docs/
+docs/node_modules/
+docs/package-lock.json
+docs/package.json

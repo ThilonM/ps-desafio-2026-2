@@ -10,7 +10,7 @@ export function DashboardSummaryCards({
   projectsCount,
 }: DashboardSummaryCardsProps) {
   return (
-    <section className="grid gap-4 md:grid-cols-2">
+    <>
       <DashboardContainer className="space-y-2">
         <p className="text-sm font-medium text-muted-foreground">
           Membros registrados
@@ -24,6 +24,6 @@ export function DashboardSummaryCards({
         </p>
         <p className="text-3xl font-bold">{projectsCount}</p>
       </DashboardContainer>
-    </section>
+    </>
   )
 }
