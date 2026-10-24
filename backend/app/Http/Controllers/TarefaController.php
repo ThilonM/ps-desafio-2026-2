@@ -15,7 +15,8 @@ class TarefaController extends Controller
 {
     public function __construct(
         protected AlocacaoMembroService $alocacao,
-    ) {}
+    ) {
+    }
 
     public function index(): JsonResponse
     {
