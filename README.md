@@ -176,12 +176,15 @@ Prints locais em [`docs/prints/`](docs/prints/) (gerados com a app rodando). Abr
 | 6 | [`docs/prints/06-equipe-projeto.png`](docs/prints/06-equipe-projeto.png) | Diálogo de equipe / alocação |
 | 7 | [`docs/prints/07-tarefas.png`](docs/prints/07-tarefas.png) | Listagem de tarefas (ordenação) |
 | 8 | [`docs/prints/08-tarefa-form.png`](docs/prints/08-tarefa-form.png) | Formulário de tarefa |
+| 9 | [`docs/prints/09-validacao-trava-422.png`](docs/prints/09-validacao-trava-422.png) | Toast 422 da trava (máx. 2 projetos ativos) |
 
 Para regenerar:
 
 ```bash
 # com backend e frontend no ar
 node docs/capture-prints.mjs
+node docs/capture-prints-extras.mjs
+node docs/capture-trava-422.mjs
 ```
 
 ---

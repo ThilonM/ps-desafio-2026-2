@@ -107,6 +107,10 @@ Arquivos-chave:
 
 ![Formulário de tarefa](prints/08-tarefa-form.png)
 
+![Toast 422 da trava](prints/09-validacao-trava-422.png)
+
+**O que o print 09 prova:** ao tentar alocar um membro que já está em 2 projetos ativos, a API devolve **422** e a UI mostra toast vermelho com a mensagem da trava.
+
 ---
 
 ## Parte D — Missão 3 (documentação e versionamento)
@@ -121,11 +125,11 @@ Arquivo: `README.md` — contém exatamente o que o edital pede:
 4. Demonstração visual (prints em `docs/prints/`)
 5. Extras documentados (o que não está no README **não conta**)
 
-### Versionamento pedido
+### Versionamento (no fork)
 
-1. Trabalho no **fork** (`ThilonM/ps-desafio-2026-2`)
-2. Branch de entrega: `entrega/thilon-m` (padrão `entrega/nome-sobrenome`)
-3. **Pull Request** no repositório original, com seção **Uso de IA**
+1. Trabalho no **fork** (`ThilonM/ps-desafio-2026-2`) — **não** envia código de volta para o `adaptiOficial` daqui
+2. Branch de entrega: `entrega/thilon-m`
+3. Quando **você** for abrir o PR (manualmente), use a seção **Uso de IA** (texto pronto abaixo na Parte J)
 
 ### Prints — Missão 3 / extras
 
