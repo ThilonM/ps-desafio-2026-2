@@ -30,20 +30,26 @@ class TarefaController extends Controller
             ->with(['projeto:id,nome', 'membro:id,nome,email'])
             ->get()
             ->sort(function (Tarefa $a, Tarefa $b) use ($statusOrdem) {
-                // 1) Concluídas no final
+                // 0) Concluídas sempre no final
                 $aConcluida = $a->status === Tarefa::STATUS_CONCLUIDA ? 1 : 0;
                 $bConcluida = $b->status === Tarefa::STATUS_CONCLUIDA ? 1 : 0;
                 if ($aConcluida !== $bConcluida) {
                     return $aConcluida <=> $bConcluida;
                 }
 
-                // 2) Nome do projeto (A–Z)
+                // 1) Projeto (A–Z)
                 $cmpProjeto = strcasecmp(
                     (string) ($a->projeto?->nome ?? ''),
                     (string) ($b->projeto?->nome ?? ''),
                 );
                 if ($cmpProjeto !== 0) {
                     return $cmpProjeto;
+                }
+
+                // 2) Título (A–Z)
+                $cmpTitulo = strcasecmp((string) $a->titulo, (string) $b->titulo);
+                if ($cmpTitulo !== 0) {
+                    return $cmpTitulo;
                 }
 
                 // 3) Situação: Pendente → Em andamento → Concluída
@@ -53,17 +59,11 @@ class TarefaController extends Controller
                     return $cmpStatus;
                 }
 
-                // 4) Nome do membro (A–Z)
-                $cmpMembro = strcasecmp(
+                // 4) Membro (A–Z)
+                return strcasecmp(
                     (string) ($a->membro?->nome ?? ''),
                     (string) ($b->membro?->nome ?? ''),
                 );
-                if ($cmpMembro !== 0) {
-                    return $cmpMembro;
-                }
-
-                // Desempate: título da tarefa (A–Z)
-                return strcasecmp((string) $a->titulo, (string) $b->titulo);
             })
             ->values();
 
