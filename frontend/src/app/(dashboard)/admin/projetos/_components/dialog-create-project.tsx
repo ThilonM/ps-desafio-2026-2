@@ -43,7 +43,8 @@ export function DialogCreateProjeto({ children }: DialogCreateProjetoProps) {
           <DialogTitle>Adicionar projeto</DialogTitle>
           <DialogDescription>
             Preencha as informações do novo projeto abaixo e clique em
-            &rdquo;Salvar&rdquo; para incluí-lo no sistema.
+            &rdquo;Salvar&rdquo;. Datas de início e fim não podem cair em
+            feriado nacional (BrasilAPI).
           </DialogDescription>
         </DialogHeader>
         <form action={submit}>

@@ -2,10 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Concerns\ValidaDatasProjetoNaoFeriado;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProjetoRequest extends FormRequest
 {
+    use ValidaDatasProjetoNaoFeriado;
+
     public function authorize(): bool
     {
         return true;
@@ -20,6 +24,17 @@ class StoreProjetoRequest extends FormRequest
             'data_inicio' => ['required', 'date'],
             'data_fim' => ['required', 'date', 'after_or_equal:data_inicio'],
         ];
+    }
+
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator): void {
+            if ($validator->errors()->isNotEmpty()) {
+                return;
+            }
+
+            $this->validarDatasProjetoNaoFeriado($validator);
+        });
     }
 
     public function attributes(): array

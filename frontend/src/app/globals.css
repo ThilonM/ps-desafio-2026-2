@@ -46,3 +46,45 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer components {
+    .projetos-calendar .fc {
+        --fc-border-color: hsl(var(--border));
+        --fc-button-bg-color: hsl(var(--primary));
+        --fc-button-border-color: hsl(var(--primary));
+        --fc-button-hover-bg-color: hsl(var(--primary-max));
+        --fc-button-hover-border-color: hsl(var(--primary-max));
+        --fc-button-active-bg-color: hsl(var(--primary-max));
+        --fc-button-active-border-color: hsl(var(--primary-max));
+        --fc-today-bg-color: hsl(var(--primary-min) / 0.12);
+        --fc-event-bg-color: hsl(var(--primary));
+        --fc-event-border-color: hsl(var(--primary));
+        --fc-event-text-color: hsl(var(--primary-foreground));
+        --fc-page-bg-color: transparent;
+        --fc-neutral-bg-color: hsl(var(--muted));
+        font-family: inherit;
+    }
+
+    .projetos-calendar .fc .fc-toolbar-title {
+        @apply text-lg font-semibold text-card-foreground;
+    }
+
+    .projetos-calendar .fc .fc-button {
+        @apply text-sm capitalize shadow-none;
+    }
+
+    .projetos-calendar .fc .fc-col-header-cell-cushion,
+    .projetos-calendar .fc .fc-daygrid-day-number {
+        @apply text-sm text-foreground no-underline;
+    }
+
+    .projetos-calendar .fc .fc-event {
+        @apply cursor-default rounded-sm px-1 py-0.5 text-xs;
+    }
+
+    .projetos-calendar .fc .fc-list-event-title,
+    .projetos-calendar .fc .fc-list-day-text,
+    .projetos-calendar .fc .fc-list-day-side-text {
+        @apply text-foreground;
+    }
+}

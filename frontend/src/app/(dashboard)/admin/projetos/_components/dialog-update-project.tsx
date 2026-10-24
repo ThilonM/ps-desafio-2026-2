@@ -48,7 +48,8 @@ export function DialogUpdateProjeto({
           <DialogTitle>Editar projeto</DialogTitle>
           <DialogDescription>
             Atualize as informações do projeto abaixo e clique em
-            &quot;Salvar&quot; para aplicar as alterações.
+            &quot;Salvar&quot;. Datas de início e fim não podem cair em
+            feriado nacional (BrasilAPI).
           </DialogDescription>
         </DialogHeader>
         <form action={submit}>

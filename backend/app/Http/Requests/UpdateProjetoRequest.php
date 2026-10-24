@@ -2,12 +2,15 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Concerns\ValidaDatasProjetoNaoFeriado;
 use App\Models\Projeto;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProjetoRequest extends FormRequest
 {
+    use ValidaDatasProjetoNaoFeriado;
+
     public function authorize(): bool
     {
         return true;
@@ -47,7 +50,11 @@ class UpdateProjetoRequest extends FormRequest
                     'data_fim',
                     'A data de término deve ser igual ou posterior à data de início.'
                 );
+
+                return;
             }
+
+            $this->validarDatasProjetoNaoFeriado($validator);
         });
     }
 
