@@ -18,7 +18,14 @@ class StoreTarefaRequest extends FormRequest
         return [
             'projeto_id' => ['required', 'uuid', 'exists:projetos,id'],
             'membro_id' => ['required', 'uuid', 'exists:membros,id'],
-            'titulo' => ['required', 'string', 'max:255'],
+            'titulo' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('tarefas', 'titulo')
+                    ->where('projeto_id', $this->input('projeto_id'))
+                    ->where('membro_id', $this->input('membro_id')),
+            ],
             'descricao' => ['nullable', 'string'],
             'status' => ['sometimes', 'string', Rule::in(Tarefa::STATUSES)],
         ];
@@ -41,6 +48,7 @@ class StoreTarefaRequest extends FormRequest
             'membro_id.required' => 'A tarefa deve ser atribuída a um membro.',
             'projeto_id.required' => 'A tarefa deve estar vinculada a um projeto.',
             'status.in' => 'Informe uma situação válida para a tarefa.',
+            'titulo.unique' => 'Este membro já possui uma tarefa com este título neste projeto.',
         ];
     }
 }
