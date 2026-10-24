@@ -12,13 +12,11 @@ import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { Label } from '@/components/label'
 import { NativeSelect } from '@/components/native-select'
-import {
-  attachMembroProjeto,
-  detachMembroProjeto,
-} from '@/actions/tarefa'
+import { attachMembroProjeto, detachMembroProjeto } from '@/actions/tarefa'
 import { filterFormData } from '@/services/filter-form-data'
 import { toastApiError } from '@/services/toast-api-error'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/use-toast'
 import { projetoType } from '@/types/projeto'
 import { membroType } from '@/types/member'
@@ -47,6 +45,7 @@ export function DialogEquipeProjeto({
 }: DialogEquipeProjetoProps) {
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
+  const router = useRouter()
   const equipe = projeto.membros ?? []
   const equipeIds = new Set(equipe.map((m) => m.id))
   const disponiveis = membros.filter((m) => !equipeIds.has(m.id))
@@ -65,6 +64,7 @@ export function DialogEquipeProjeto({
       )
     } else {
       toast({ title: 'Membro alocado no projeto!' })
+      router.refresh()
     }
   }
 
@@ -77,6 +77,7 @@ export function DialogEquipeProjeto({
       toastApiError(toast, error, 'Não foi possível remover o membro!')
     } else {
       toast({ title: 'Membro removido do projeto!' })
+      router.refresh()
     }
   }
 
@@ -94,7 +95,8 @@ export function DialogEquipeProjeto({
           <DialogTitle>Equipe — {projeto.nome}</DialogTitle>
           <DialogDescription>
             Um membro pode estar em no máximo 2 projetos ativos no mesmo
-            intervalo de realização. Se a trava disparar, o aviso aparece neste toast.
+            intervalo de realização. Se a trava disparar, o aviso aparece neste
+            toast.
           </DialogDescription>
         </DialogHeader>
 
@@ -113,7 +115,9 @@ export function DialogEquipeProjeto({
               >
                 <div>
                   <p className="text-sm font-medium">{membro.nome}</p>
-                  <p className="text-xs text-muted-foreground">{membro.email}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {membro.email}
+                  </p>
                 </div>
                 <Button
                   type="button"

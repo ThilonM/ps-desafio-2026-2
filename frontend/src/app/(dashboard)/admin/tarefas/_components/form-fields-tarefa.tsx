@@ -9,11 +9,7 @@ import { NativeSelect } from '@/components/native-select'
 import { cn } from '@/lib/utils'
 import { membroType } from '@/types/member'
 import { projetoType } from '@/types/projeto'
-import {
-  TAREFA_STATUS_LABELS,
-  tarefaStatus,
-  tarefaType,
-} from '@/types/tarefa'
+import { TAREFA_STATUS_LABELS, tarefaStatus, tarefaType } from '@/types/tarefa'
 import { useFormStatus } from 'react-dom'
 
 interface FormFieldsTarefaProps {

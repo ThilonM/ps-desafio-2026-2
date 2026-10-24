@@ -29,11 +29,7 @@ function TarefaActions({
 }) {
   return (
     <div className="flex flex-wrap justify-end gap-2">
-      <DialogUpdateTarefa
-        tarefa={tarefa}
-        projetos={projetos}
-        membros={membros}
-      >
+      <DialogUpdateTarefa tarefa={tarefa} projetos={projetos} membros={membros}>
         <Button variant="secondary-inverse" size="icon">
           <LuPen />
         </Button>
@@ -48,15 +44,12 @@ function TarefaActions({
 }
 
 export default async function ListTarefas() {
-  const [
-    { response: tarefas },
-    { response: projetos },
-    { response: membros },
-  ] = await Promise.all([
-    api<tarefaType[]>('GET', '/tarefas'),
-    api<projetoType[]>('GET', '/projetos'),
-    api<membroType[]>('GET', '/membros'),
-  ])
+  const [{ response: tarefas }, { response: projetos }, { response: membros }] =
+    await Promise.all([
+      api<tarefaType[]>('GET', '/tarefas'),
+      api<projetoType[]>('GET', '/projetos'),
+      api<membroType[]>('GET', '/membros'),
+    ])
 
   if (!tarefas || !projetos || !membros) {
     return (
@@ -97,8 +90,7 @@ export default async function ListTarefas() {
                 Membro: {tarefa.membro?.nome ?? '-'}
               </p>
               <p className="text-sm text-muted-foreground">
-                Situação:{' '}
-                {TAREFA_STATUS_LABELS[tarefa.status] ?? tarefa.status}
+                Situação: {TAREFA_STATUS_LABELS[tarefa.status] ?? tarefa.status}
               </p>
             </div>
             <TarefaActions

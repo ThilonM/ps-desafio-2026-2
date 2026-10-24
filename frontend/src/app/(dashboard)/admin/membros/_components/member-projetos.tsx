@@ -36,7 +36,9 @@ export function MemberProjetos({ projetos = [] }: MemberProjetosProps) {
               {formatDateBr(projeto.data_fim)}
             </p>
             {projeto.descricao && (
-              <p className="text-sm text-muted-foreground">{projeto.descricao}</p>
+              <p className="text-sm text-muted-foreground">
+                {projeto.descricao}
+              </p>
             )}
           </li>
         ))}

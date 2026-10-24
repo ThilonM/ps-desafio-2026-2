@@ -51,6 +51,7 @@ export function Input({
           { hidden },
           className,
         )}
+        {...props}
         onInvalid={(event) => {
           setPortugueseCustomValidity(event.currentTarget)
           onInvalid?.(event)
@@ -63,7 +64,6 @@ export function Input({
           clearPortugueseCustomValidity(event.currentTarget)
           onChange?.(event)
         }}
-        {...props}
       />
       {error && <p className="text-destructive text-xs mt-2">{error}</p>}
     </>
